@@ -1,0 +1,136 @@
+/*package com.kb.printing;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+import java.awt.Graphics2D;
+
+import java.awt.Rectangle;
+
+import java.awt.font.LineBreakMeasurer;
+import java.awt.font.TextLayout;
+import java.awt.geom.Point2D;
+import java.awt.print.Book;
+
+import java.awt.print.PageFormat;
+
+import java.awt.print.Paper;
+
+import java.awt.print.Printable;
+
+import java.awt.print.PrinterException;
+
+import java.awt.print.PrinterJob;
+
+import java.io.FileInputStream;
+
+import java.io.IOException;
+
+import java.nio.ByteBuffer;
+import java.text.AttributedCharacterIterator;
+
+import javax.print.PrintService;
+
+public class PrintPDF {
+
+	public static void main( String[] args ) throws IOException, PrinterException {
+
+		new PrintPDF().printPDF( "C:\\Unit_Test_Results.pdf", "\\\\PrintServer\\MyPrinter",
+
+		"PDF Print Job" );
+
+	}
+
+
+
+	*//**
+	 * This method prints the specified PDF to specified printer under specified
+	 * job name
+	 * 
+	 * @param filePath
+	 *          Path of PDF file
+	 * @param printerName
+	 *          Printer name
+	 * @param jobName
+	 *          Print job name
+	 * @throws IOException
+	 * @throws PrinterException
+	 *//*
+
+	public void printPDF( String filePath, String printerName, String jobName )
+
+	throws IOException, PrinterException {
+
+		FileInputStream fileInputStream = new FileInputStream( filePath );
+
+		byte[] pdfContent = new byte[fileInputStream.available()];
+
+		fileInputStream.read( pdfContent, 0, fileInputStream.available() );
+
+		ByteBuffer buffer = ByteBuffer.wrap( pdfContent );
+
+
+		Printable printable = new Printable() {
+
+			public int print( Graphics graphics, PageFormat pageFormat,
+
+			int pageIndex ) throws PrinterException {
+
+				Graphics2D g2d = ( Graphics2D )g;
+
+				g2d.translate( format.getImageableX(), format.getImageableY() );
+
+				g2d.setPaint( Color.black );
+
+				Point2D.Float pen = new Point2D.Float();
+				AttributedCharacterIterator charIterator = mStyledText.getIterator();
+				LineBreakMeasurer measurer = new LineBreakMeasurer( charIterator, g2d.getFontRenderContext() );
+				float wrappingWidth = ( float )format.getImageableWidth();
+				while ( measurer.getPosition() < charIterator.getEndIndex() ) {
+					TextLayout layout = measurer.nextLayout( wrappingWidth );
+					pen.y += layout.getAscent();
+					float dx = layout.isLeftToRight() ? 0 : ( wrappingWidth - layout.getAdvance() );
+					layout.draw( g2d, pen.x + dx, pen.y );
+					pen.y += layout.getDescent() + layout.getLeading();
+				}
+				return Printable.PAGE_EXISTS;
+			}
+		};
+
+		PrinterJob printJob = PrinterJob.getPrinterJob();
+
+		PageFormat pageFormat = PrinterJob.getPrinterJob().defaultPage();
+
+		printJob.setJobName( jobName );
+
+		Book book = new Book();
+
+		book.append( printable, pageFormat, pdfFile.getNumPages() );
+
+		printJob.setPageable( book );
+
+		Paper paper = new Paper();
+
+		paper.setImageableArea( 0, 0, paper.getWidth(), paper.getHeight() );
+
+		pageFormat.setPaper( paper );
+
+		PrintService[] printServices = PrinterJob.lookupPrintServices();
+
+		for ( int count = 0; count < printServices.length; ++count ) {
+
+			if ( printerName.equalsIgnoreCase( printServices[count].getName() ) ) {
+
+				printJob.setPrintService( printServices[count] );
+
+				break;
+
+			}
+
+		}
+
+		printJob.print();
+
+	}
+
+}*/

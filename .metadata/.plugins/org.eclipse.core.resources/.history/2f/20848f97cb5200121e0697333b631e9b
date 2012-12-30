@@ -1,0 +1,44 @@
+import java.io.File;
+import javax.print.DocFlavor;
+import javax.print.DocPrintJob;
+import javax.print.PrintException;
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.print.SimpleDoc;
+import javax.print.attribute.DocAttributeSet;
+import javax.print.attribute.HashDocAttributeSet;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.print.attribute.standard.MediaSizeName;
+
+public class Testhello {
+
+	public static void main( String args[] ) {
+		PrintService defaultPrintService = PrintServiceLookup.lookupDefaultPrintService();
+		DocPrintJob printerJob = defaultPrintService.createPrintJob();
+		File pdfFile = new File( "pdfdoc/TestPDf.pdf" );
+		SimpleDoc simpleDoc = null;
+
+		try {
+			DocAttributeSet docaset = new HashDocAttributeSet();
+			docaset.add( MediaSizeName.ISO_A4 );
+			simpleDoc = new SimpleDoc( pdfFile, DocFlavor.SERVICE_FORMATTED.PAGEABLE, docaset );
+		} catch ( Exception ex ) {
+			ex.printStackTrace();
+		}
+		
+		try {
+			PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
+			aset.add( MediaSizeName.ISO_A4 );
+			if(simpleDoc != null) {
+			printerJob.print( simpleDoc, aset );
+			} else {
+				System.out.println("Problem while reading pdf document");
+				System.exit();
+			}
+		} catch ( PrintException ex ) {
+			ex.printStackTrace();
+		}
+		
+	}
+}

@@ -1,0 +1,78 @@
+/*import java.awt.*;
+import java.awt.font.*;
+import java.awt.geom.*;
+import java.awt.print.*;
+import java.io.File;
+import java.text.*;
+
+*//**
+ * The PrintText application expands on the
+ * PrintExample application in that it images
+ * text on to the single page printed.
+ *//*
+public class PrintText implements Printable {
+
+	*//**
+	 * The text to be printed.
+	 *//*
+	private static final String						mText		;
+	*//**
+	 * Our text in a form for which we can obtain a
+	 * AttributedCharacterIterator.
+	 *//*
+	private static final AttributedString	mStyledText	= new AttributedString( mText );
+
+
+
+	*//**
+	 * Print a single page containing some sample text.
+	 *//*
+	static public void main( String args[] ) {
+		File file = new File( "C:\\Unit_Test_Results.pdf" );
+		 *//**Read the text content from this location **//*
+    String mText = readContentFromFileToPrint(file);
+
+    *//**Create an AttributedString object from the text read*//*
+    myStyledText = new AttributedString(mText);
+
+		PrinterJob printerJob = PrinterJob.getPrinterJob();
+
+		Book book = new Book();
+		book.append( new PrintText(), new PageFormat() );
+
+		printerJob.setPageable( book );
+
+		boolean doPrint = printerJob.printDialog();
+		if ( doPrint ) {
+			try {
+				printerJob.print();
+			} catch ( PrinterException exception ) {
+				System.err.println( "Printing error: " + exception );
+			}
+		}
+	}
+
+
+
+	public int print( Graphics g, PageFormat format, int pageIndex ) {
+
+		Graphics2D g2d = ( Graphics2D )g;
+
+		g2d.translate( format.getImageableX(), format.getImageableY() );
+
+		g2d.setPaint( Color.black );
+
+		Point2D.Float pen = new Point2D.Float();
+		AttributedCharacterIterator charIterator = mStyledText.getIterator();
+		LineBreakMeasurer measurer = new LineBreakMeasurer( charIterator, g2d.getFontRenderContext() );
+		float wrappingWidth = ( float )format.getImageableWidth();
+		while ( measurer.getPosition() < charIterator.getEndIndex() ) {
+			TextLayout layout = measurer.nextLayout( wrappingWidth );
+			pen.y += layout.getAscent();
+			float dx = layout.isLeftToRight() ? 0 : ( wrappingWidth - layout.getAdvance() );
+			layout.draw( g2d, pen.x + dx, pen.y );
+			pen.y += layout.getDescent() + layout.getLeading();
+		}
+		return Printable.PAGE_EXISTS;
+	}
+}*/

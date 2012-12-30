@@ -1,0 +1,15 @@
+import com.lowagie.tools.Executable;
+
+public class ReadPDFFile {
+
+	public static void main( String args[] ) {
+
+		try {
+			Executable ex = new Executable();
+			ex.printDocumentSilent( "pdfdoc/TestPDf.pdf", true );
+		} catch ( Exception e ) {
+			System.out.println( e );
+		}
+
+	}
+}
